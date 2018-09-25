@@ -21,38 +21,13 @@ function writeTags (){
 };
 
 writeTags ();
-
+							
 function assignSearchTerm(param){
 	searchTerm = param;
 	makeRequest(searchTerm);
 };
 
-function writeGifs(p){
-	g = document.getElementById('display1');
-	console.log(g);
-	console.log('p = ' + p)
-	// g.innerHTML = ' ';
-	for(i = 0; i < p.data; i++){
-		console.log(p.data)
-		//create div, img and rating tag
-		let d = document.createElement('div');
-		let e = document.createElement('img');
-		let f = document.createElement('h3');
-		//attach gif data to img tag
-		e.setAttribute('src', p.data[i].images[fixed_height_still].url);
-		e.setAttribute('data-still', p.data[i].images[fixed_height_still].url);
-		e.setAttribute('data-annimate', p.data[i].images[fixed_width].url);
-		console.log(e)
-		//setting h3 as the rating;
-		f.textContent = p.data[i].rating;
-		//append rating to div
-		d.appendChild(f);
-		//apend img to div
-		d.appendChild(e);
-		//append div to dsiplay1
-		g.appendChild(d);
-	}
-}
+
 
 var xhr;
 function makeRequest(param){
@@ -73,7 +48,29 @@ function makeRequest(param){
 				
 				obj = JSON.parse(xhr.response);
 				console.log(obj);
-				writeGifs(obj);
+
+				function writeGifs(){
+					g = document.getElementById('display1');
+					console.log(g);
+						(obj.data).forEach(index => {
+							console.dir(index);
+							let d = document.createElement('div');
+							let e = document.createElement('img');
+							let f = document.createElement('h3');
+							d.setAttribute('class', 'gif')
+							f.textContent = index.rating;							
+							e.setAttribute('src', index.images['fixed_height_still'].url)
+							e.setAttribute('data-still', index.images['fixed_height_still'].url)
+							e.setAttribute('data-animate', index.images['fixed_height'].url)
+							e.setAttribute('data-state', 'still');
+							d.appendChild(f);
+							d.appendChild(e);
+							g.appendChild(d);
+							
+						});
+				};
+
+				writeGifs();
 
 			} else {
 				console('request failed')
