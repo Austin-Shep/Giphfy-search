@@ -109,8 +109,5 @@ document.querySelector('#display1').addEventListener('click', function(event){
 	}
 });
 
-//pusedocode for animating and pausing gif
-//== gif on click, if data-state:still > set src to the data-animate and state to animate. else >set src to data-still and state to still.
-
 //psuedocode for favoriting===============
 //== button.fav on 'click' run=> cookie, assign this(div.gifDiv) the class of '.favorite'=> if div.gifDiv contains '.favorite' append the thumbnail to 'div.favorite'. store 'div.favorite' as cookie

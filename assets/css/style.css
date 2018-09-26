@@ -1,0 +1,59 @@
+button.animal{
+    padding:.5rem;
+    margin:.5rem;
+}
+button.animal:hover{
+    background-color: black;
+    color: grey;
+}
+button.animal:active{
+    color: black;
+    background-color: grey;
+}
+
+#inputForm{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+
+    background-color: rgba(168, 168, 167, 0.562);
+    padding: 1.6rem;
+    border-radius: .5rem;
+}
+
+div#display1{
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px){
+    h1{
+        text-align: center;
+    }
+    #inputForm{
+        position: inherit;
+        width: 95%;
+        padding: 0.5rem;
+        text-align: center;
+    }
+    #tags{
+        text-align: center;
+        width: 100%;
+    }
+    button.animal{
+        padding: .5rem .8rem;
+        margin: auto;
+    }
+
+
+}
+
+@media only screen and (max-width: 320px){
+    #inputForm{
+        width: 100%;
+        
+    }
+    button.animal{
+        padding: .5rem;
+    }
+}
