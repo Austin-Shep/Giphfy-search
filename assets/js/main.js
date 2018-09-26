@@ -47,22 +47,24 @@ function makeRequest(param){
 			if(xhr.status === 200){
 				
 				obj = JSON.parse(xhr.response);
-				console.log(obj);
+				// console.log(obj);
 
 				function writeGifs(){
 					g = document.getElementById('display1');
-					console.log(g);
+					g.innerHTML = '';
+					// console.log(g);
 						(obj.data).forEach(index => {
-							console.dir(index);
+							// console.dir(index);
 							let d = document.createElement('div');
 							let e = document.createElement('img');
 							let f = document.createElement('h3');
-							d.setAttribute('class', 'gif')
-							f.textContent = index.rating;							
+							d.setAttribute('class', 'gifDiv')
+							f.textContent = 'rating: ' + index.rating;							
 							e.setAttribute('src', index.images['fixed_height_still'].url)
 							e.setAttribute('data-still', index.images['fixed_height_still'].url)
 							e.setAttribute('data-animate', index.images['fixed_height'].url)
 							e.setAttribute('data-state', 'still');
+							e.setAttribute('class', 'gif')
 							d.appendChild(f);
 							d.appendChild(e);
 							g.appendChild(d);
@@ -79,7 +81,8 @@ function makeRequest(param){
 	};
 
 //-======event listeners=======-\\
-
+	
+	//==users tags listener=\\
 var submit = document.getElementById('submit')
 submit.addEventListener('click',function (event){
 	var newTag = document.querySelector('#newTag').value;
@@ -87,3 +90,27 @@ submit.addEventListener('click',function (event){
 	writeTags();
 	event.preventDefault();
 });
+
+	//====play/pause====\\
+document.querySelector('#display1').addEventListener('click', function(event){
+	let img = event.target.closest('img');
+	if (!img) return;
+	console.log(img)
+	var state = img.getAttribute('data-state');
+	var still = img.getAttribute('data-still');
+	var animate = img.getAttribute('data-animate');
+	if(state == 'still'){
+		img.setAttribute('data-state', 'animate');
+		img.setAttribute('src', animate);
+	}else{
+		img.setAttribute('data-state', 'still');
+		img.setAttribute('src', still); 
+
+	}
+});
+
+//pusedocode for animating and pausing gif
+//== gif on click, if data-state:still > set src to the data-animate and state to animate. else >set src to data-still and state to still.
+
+//psuedocode for favoriting===============
+//== button.fav on 'click' run=> cookie, assign this(div.gifDiv) the class of '.favorite'=> if div.gifDiv contains '.favorite' append the thumbnail to 'div.favorite'. store 'div.favorite' as cookie
